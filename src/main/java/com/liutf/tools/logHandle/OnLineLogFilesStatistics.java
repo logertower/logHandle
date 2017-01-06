@@ -4,6 +4,7 @@ package com.liutf.tools.logHandle;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,7 +49,11 @@ public class OnLineLogFilesStatistics {
 
         //读取，解析文件
         for (String strUrl : strUrlArray) {
-            readLog(strUrl, statisticsMap);
+            try {
+                readLog(strUrl, statisticsMap);
+            } catch (FileNotFoundException fe) {
+                System.out.println("文件：" + strUrl + "不存在");
+            }
         }
 
         //输出日志统计结果
